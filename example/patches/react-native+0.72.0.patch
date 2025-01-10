@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native/scripts/react-native-xcode.sh b/node_modules/react-native/scripts/react-native-xcode.sh
+index e6fc8d1..7cd0966 100755
+--- a/node_modules/react-native/scripts/react-native-xcode.sh
++++ b/node_modules/react-native/scripts/react-native-xcode.sh
+@@ -152,7 +152,7 @@ if [[ $USE_HERMES != false && $DEV == false ]]; then
+   EXTRA_ARGS="$EXTRA_ARGS --minify false"
+ fi
+ 
+-"$NODE_BINARY" $NODE_ARGS "$CLI_PATH" $BUNDLE_COMMAND \
++/Users/kirill/.nvm/versions/node/v18.17.0/bin/node "$CLI_PATH" $BUNDLE_COMMAND \
+   $CONFIG_ARG \
+   --entry-file "$ENTRY_FILE" \
+   --platform "$BUNDLE_PLATFORM" \
