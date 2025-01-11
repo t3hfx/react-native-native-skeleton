@@ -14,10 +14,10 @@ class NativeSkeletonViewManager: RCTViewManager {
 }
 
 class NativeSkeletonView : UIView {
-  private var isSkeletonVisible = false
+  private var isSkeletonVisible = true
 
   // Expose visible property to be set from JavaScript
-  @objc var visible: Bool = false {
+  @objc var visible: Bool = true {
     didSet {
       self.setSkeletonVisibility(isVisible: visible)
     }
