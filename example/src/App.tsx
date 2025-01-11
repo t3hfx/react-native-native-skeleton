@@ -6,7 +6,7 @@ import { NativeSkeletonView } from 'react-native-native-skeleton';
 export default function App() {
   return (
     <View style={styles.container}>
-      <NativeSkeletonView color="#32a852" style={styles.box} />
+      <NativeSkeletonView visible style={styles.box} />
     </View>
   );
 }

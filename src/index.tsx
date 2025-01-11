@@ -12,7 +12,7 @@ const LINKING_ERROR =
   '- You are not using Expo Go\n';
 
 type NativeSkeletonProps = {
-  color: string;
+  visible: boolean;
   style: ViewStyle;
 };
 

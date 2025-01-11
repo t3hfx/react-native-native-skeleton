@@ -15,7 +15,7 @@ import { NativeSkeletonView } from "react-native-native-skeleton";
 
 // ...
 
-<NativeSkeletonView color="tomato" />
+<NativeSkeletonView visible={true} />
 ```
 
 ## Contributing
