@@ -1,8 +1,11 @@
+import type { PropsWithChildren } from "react";
 import {
   requireNativeComponent,
   UIManager,
   Platform,
   type ViewStyle,
+  View,
+  StyleSheet,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -24,3 +27,13 @@ export const NativeSkeletonView =
     : () => {
         throw new Error(LINKING_ERROR);
       };
+
+export const NativeSkeletonViewWrapper = ({visible, style, children}: PropsWithChildren<NativeSkeletonProps>) =>
+  {
+    return (
+      <View style={style}> 
+        {children}
+        <NativeSkeletonView visible={visible} style={{...StyleSheet.absoluteFillObject}} />
+      </View>
+    )
+  }
