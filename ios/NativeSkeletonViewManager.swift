@@ -15,57 +15,53 @@ class NativeSkeletonViewManager: RCTViewManager {
 
 class NativeSkeletonView : UIView {
   private var isSkeletonVisible = true
-  // private var baseColor: UIColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) // Default color
-  // private var secondaryColor: UIColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1) // Default color
+  //  private var baseColor: UIColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) // Default color
+  //  private var secondaryColor: UIColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1) // Default color
 
-  // sadasdasdasdsad
-  // private var baseColor: UIColor = UIColor.clear // Default color
-  // private var secondaryColor: UIColor = UIColor.clear // Default color
+  private var baseColor: UIColor = UIColor.clear // Default color
+  private var secondaryColor: UIColor = UIColor.clear // Default color
 
 
-  // // Expose initBackgroundColor property to be set from JavaScript
-  // @objc var initBackgroundColor: String = "" {
-  //   didSet {
-  //     let color = hexStringToUIColor(hexColor: initBackgroundColor) 
-  //     self.backgroundColor = color
-  //     self.baseColor = color
-  //     checkAndSetSkeletonVisibility()
-  //     // self.setSkeletonVisibility(isVisible: true, baseColor: color)
-  //   }
-  // }
-  // // Expose secondaryBackgroundColor property to be set from JavaScript
-  //  @objc var secondaryBackgroundColor: String = "" {
-  //   didSet {
-  //     let color = hexStringToUIColor(hexColor: secondaryBackgroundColor) 
-  //     self.secondaryColor = color
-  //     checkAndSetSkeletonVisibility()
-  //     // self.setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
-  //   }
-  // }
-  // sadasdasd
+  // Expose initBackgroundColor property to be set from JavaScript
+  @objc var initBackgroundColor: String = "" {
+    didSet {
+      let color = hexStringToUIColor(hexColor: initBackgroundColor) 
+      self.backgroundColor = color
+      self.baseColor = color
+      checkAndSetSkeletonVisibility()
+    }
+  }
+  // Expose secondaryBackgroundColor property to be set from JavaScript
+   @objc var secondaryBackgroundColor: String = "" {
+    didSet {
+      let color = hexStringToUIColor(hexColor: secondaryBackgroundColor) 
+      self.secondaryColor = color
+      checkAndSetSkeletonVisibility()
+    }
+  }
 
   // Expose visible property to be set from JavaScript
   @objc var visible: Bool = true {
     didSet {
       // guard visible != isSkeletonVisible else { return }
       isSkeletonVisible = visible
-      self.setSkeletonVisibility(isVisible: visible)
+      // self.setSkeletonVisibility(isVisible: visible)
 
 
-      // checkAndSetSkeletonVisibility()
-      // if !visible {
-      //   self.backgroundColor = nil
-      //   self.setSkeletonVisibility(isVisible: false, baseColor: baseColor, secondaryColor: nil)
-      // }
+      checkAndSetSkeletonVisibility()
+      if !visible {
+        self.backgroundColor = nil
+        self.setSkeletonVisibility(isVisible: false, baseColor: baseColor, secondaryColor: nil)
+      }
     }
   }
 
-  // private func checkAndSetSkeletonVisibility() {
-  // // Ensure all conditions are met before calling setSkeletonVisibility
-  // if visible && !secondaryBackgroundColor.isEmpty && !initBackgroundColor.isEmpty {
-  //   setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
-  //   } 
-  // }
+  private func checkAndSetSkeletonVisibility() {
+  // Ensure all conditions are met before calling setSkeletonVisibility
+  if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !initBackgroundColor.isEmpty {
+    setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
+    } 
+  }
 
 
   override init(frame: CGRect) {
@@ -80,23 +76,14 @@ class NativeSkeletonView : UIView {
 
   private func setupSkeleton() {
     self.isSkeletonable = true
-    self.setSkeletonVisibility(isVisible: isSkeletonVisible)
+    // self.setSkeletonVisibility(isVisible: isSkeletonVisible)
   }
 
-  //   private func setSkeletonVisibility(isVisible: Bool, baseColor: UIColor, secondaryColor: UIColor?) {
-  //   if isVisible {
-  //     let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
-  //     self.showAnimatedGradientSkeleton(usingGradient: customGradient)
-  //   } else {
-  //     self.hideSkeleton()
-  //   }
-  // }
-
-    private func setSkeletonVisibility(isVisible: Bool
-    // , baseColor: UIColor, secondaryColor: UIColor?
-    ) {
+    private func setSkeletonVisibility(isVisible: Bool, baseColor: UIColor, secondaryColor: UIColor?) {
     if isVisible {
-      self.showAnimatedGradientSkeleton()
+      let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
+      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight)
+      self.showAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation, transition: .none)
     } else {
       self.hideSkeleton()
     }
