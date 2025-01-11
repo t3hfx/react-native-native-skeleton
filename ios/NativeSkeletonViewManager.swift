@@ -15,9 +15,6 @@ class NativeSkeletonViewManager: RCTViewManager {
 
 class NativeSkeletonView : UIView {
   private var isSkeletonVisible = true
-  //  private var baseColor: UIColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1) // Default color
-  //  private var secondaryColor: UIColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1) // Default color
-
   private var baseColor: UIColor = UIColor.clear // Default color
   private var secondaryColor: UIColor = UIColor.clear // Default color
 
@@ -26,9 +23,10 @@ class NativeSkeletonView : UIView {
   @objc var initBackgroundColor: String = "" {
     didSet {
       let color = hexStringToUIColor(hexColor: initBackgroundColor) 
-      self.backgroundColor = color
+      // // We want to have 
+      // self.backgroundColor = color
       self.baseColor = color
-      checkAndSetSkeletonVisibility()
+      checkAndUpdateSkeleton()
     }
   }
   // Expose secondaryBackgroundColor property to be set from JavaScript
@@ -36,19 +34,15 @@ class NativeSkeletonView : UIView {
     didSet {
       let color = hexStringToUIColor(hexColor: secondaryBackgroundColor) 
       self.secondaryColor = color
-      checkAndSetSkeletonVisibility()
+      checkAndUpdateSkeleton()
     }
   }
 
   // Expose visible property to be set from JavaScript
   @objc var visible: Bool = true {
     didSet {
-      // guard visible != isSkeletonVisible else { return }
       isSkeletonVisible = visible
-      // self.setSkeletonVisibility(isVisible: visible)
-
-
-      checkAndSetSkeletonVisibility()
+      checkAndUpdateSkeleton()
       if !visible {
         self.backgroundColor = nil
         self.setSkeletonVisibility(isVisible: false, baseColor: baseColor, secondaryColor: nil)
@@ -56,10 +50,12 @@ class NativeSkeletonView : UIView {
     }
   }
 
-  private func checkAndSetSkeletonVisibility() {
-  // Ensure all conditions are met before calling setSkeletonVisibility
+  private func checkAndUpdateSkeleton() {
+  // Ensure that we have secondaryBackgroundColor and initBackgroundColor from react native then update the skeleton
   if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !initBackgroundColor.isEmpty {
-    setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
+      let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
+      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight)
+      self.updateAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation)
     } 
   }
 
@@ -76,14 +72,14 @@ class NativeSkeletonView : UIView {
 
   private func setupSkeleton() {
     self.isSkeletonable = true
-    // self.setSkeletonVisibility(isVisible: isSkeletonVisible)
+    // Here we launch skeleton on init of the component, so we don't see component underneath, 
+    // it's fired before we get visible={true} from react native
+    self.setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
   }
 
     private func setSkeletonVisibility(isVisible: Bool, baseColor: UIColor, secondaryColor: UIColor?) {
     if isVisible {
-      let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
-      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight)
-      self.showAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation, transition: .none)
+      self.showAnimatedGradientSkeleton()
     } else {
       self.hideSkeleton()
     }

@@ -18,8 +18,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NativeSkeletonViewWrapper 
-        initBackgroundColor={'#000'} 
-        secondaryBackgroundColor={'#ffffff'} 
+        initBackgroundColor={'#363636'} 
+        secondaryBackgroundColor={'#6e6b6b'} 
         visible={isVisible} 
         style={styles.box}>
         <View>
