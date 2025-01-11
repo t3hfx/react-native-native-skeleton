@@ -6,6 +6,7 @@ import {
   type ViewStyle,
   View,
   StyleSheet,
+  ColorValue,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -17,6 +18,8 @@ const LINKING_ERROR =
 type NativeSkeletonProps = {
   visible: boolean;
   style: ViewStyle;
+  initBackgroundColor: ColorValue;
+  secondaryBackgroundColor: ColorValue;
 };
 
 const ComponentName = 'NativeSkeletonView';
@@ -28,12 +31,12 @@ export const NativeSkeletonView =
         throw new Error(LINKING_ERROR);
       };
 
-export const NativeSkeletonViewWrapper = ({visible, style, children}: PropsWithChildren<NativeSkeletonProps>) =>
+export const NativeSkeletonViewWrapper = ({initBackgroundColor, secondaryBackgroundColor, visible, style, children}: PropsWithChildren<NativeSkeletonProps>) =>
   {
     return (
       <View style={style}> 
         {children}
-        <NativeSkeletonView visible={visible} style={{...StyleSheet.absoluteFillObject}} />
+        <NativeSkeletonView initBackgroundColor={initBackgroundColor} secondaryBackgroundColor={secondaryBackgroundColor} visible={visible} style={{...StyleSheet.absoluteFillObject}} />
       </View>
     )
   }

@@ -13,11 +13,13 @@ export default function App() {
       setIsVisible(false)
     },3000)
   },[])
-
+// #ffffff
 
   return (
     <View style={styles.container}>
-      <NativeSkeletonViewWrapper visible={isVisible} style={styles.box}>
+      <NativeSkeletonViewWrapper 
+      // initBackgroundColor={'#000'} secondaryBackgroundColor={'#ffffff'} 
+      visible={isVisible} style={styles.box}>
         <View>
           <Text style={styles.itemTitle}>
             This is native skeleton! 
