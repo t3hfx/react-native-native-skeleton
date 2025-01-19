@@ -25,4 +25,14 @@ class NativeSkeletonViewManager : SimpleViewManager<NativeSkeletonView>() {
     fun setVisible(view: NativeSkeletonView, visible: Boolean) {
         view.setVisible(visible)
     }
+
+    @ReactProp(name = "baseBackgroundColor")
+    fun setBaseColor(view: NativeSkeletonView, baseBackgroundColor: String) {
+        view.setBaseColor(baseBackgroundColor)
+    }
+
+    @ReactProp(name = "secondaryBackgroundColor")
+    fun setSecondaryColor(view: NativeSkeletonView, secondaryBackgroundColor: String) {
+        view.setSecondaryColor(secondaryBackgroundColor)
+    }
 }
