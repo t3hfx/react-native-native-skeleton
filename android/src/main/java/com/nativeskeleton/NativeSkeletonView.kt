@@ -61,10 +61,20 @@ class NativeSkeletonView @JvmOverloads constructor(
     }
 
    fun setDuration(duration: Long) {
-        if (duration < 0) {
-            duration = 0;
-        }
         builder.setDuration(duration)
+        shimmerFrameLayout.setShimmer(builder.build())
+    }
+
+   fun setDirection(direction: String) {
+        var directionCase: Int? = null
+        when (direction) {
+            "bottomLeftTopRight" -> directionCase = Shimmer.Direction.BOTTOM_TO_TOP
+            "bottomRightTopLeft" -> directionCase = Shimmer.Direction.RIGHT_TO_LEFT
+            "topRightBottomLeft" -> directionCase = Shimmer.Direction.TOP_TO_BOTTOM
+            "topLeftBottomRight" -> directionCase = Shimmer.Direction.LEFT_TO_RIGHT
+            else -> directionCase = Shimmer.Direction.LEFT_TO_RIGHT // Default case
+        }
+        builder.setDirection(directionCase)
         shimmerFrameLayout.setShimmer(builder.build())
     }
 }

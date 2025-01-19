@@ -21,6 +21,7 @@ export default function App() {
         visible={isVisible}
         style={styles.box}
         duration={5000}
+        direction={'topRightBottomLeft'}
       >
         <View>
           <Text style={styles.itemTitle}>This is native skeleton!</Text>

@@ -15,12 +15,21 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
+type Directions = 
+// Both platforms
+'topLeftBottomRight' | 'bottomRightTopLeft' |  
+// Android only 
+'bottomLeftTopRight' | 'topRightBottomLeft' | 
+// iOS only
+'bottomTop' | 'topBottom' | 'leftRight' | 'rightLeft'
+
 type NativeSkeletonProps = {
   visible: boolean;
   style: ViewStyle;
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
   duration: number
+  direction: Directions
 };
 
 const ComponentName = 'NativeSkeletonView';
@@ -33,10 +42,12 @@ export const NativeSkeletonView =
       };
 
 export const NativeSkeletonViewWrapper = (
-    {baseBackgroundColor, 
+  {
+    baseBackgroundColor, 
     secondaryBackgroundColor, 
     visible, 
     duration, 
+    direction,
     style, 
     children
   }: PropsWithChildren<NativeSkeletonProps>) =>
@@ -49,6 +60,7 @@ export const NativeSkeletonViewWrapper = (
           secondaryBackgroundColor={secondaryBackgroundColor} 
           visible={visible} 
           duration={duration ?? 1500}
+          direction={direction ??'topLeftBottomRight'}
           style={{...StyleSheet.absoluteFillObject}} />
       </View>
     )

@@ -33,4 +33,9 @@ class NativeSkeletonViewManager : SimpleViewManager<NativeSkeletonView>() {
     fun setDuration(view: NativeSkeletonView, duration: Int) {
         view.setDuration(duration.toLong())
     }
+
+    @ReactProp(name = "direction")
+    fun setDirection(view: NativeSkeletonView, direction: String) {
+        view.setDirection(direction)
+    }
 }
