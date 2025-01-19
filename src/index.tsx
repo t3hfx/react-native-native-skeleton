@@ -60,7 +60,7 @@ export const NativeSkeletonViewWrapper = (
           secondaryBackgroundColor={secondaryBackgroundColor} 
           visible={visible} 
           duration={duration ?? 1500}
-          direction={direction ??'topLeftBottomRight'}
+          direction={direction ?? 'topLeftBottomRight'}
           style={styles.nativeView} />
       </View>
     )
