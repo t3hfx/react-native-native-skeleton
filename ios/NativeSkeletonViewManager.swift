@@ -19,12 +19,10 @@ class NativeSkeletonView : UIView {
   private var secondaryColor: UIColor = UIColor.clear // Default color
 
 
-  // Expose initBackgroundColor property to be set from JavaScript
-  @objc var initBackgroundColor: String = "" {
+  // Expose baseBackgroundColor property to be set from JavaScript
+  @objc var baseBackgroundColor: String = "" {
     didSet {
-      let color = hexStringToUIColor(hexColor: initBackgroundColor) 
-      // // We want to have 
-      // self.backgroundColor = color
+      let color = hexStringToUIColor(hexColor: baseBackgroundColor) 
       self.baseColor = color
       checkAndUpdateSkeleton()
     }
@@ -44,15 +42,14 @@ class NativeSkeletonView : UIView {
       isSkeletonVisible = visible
       checkAndUpdateSkeleton()
       if !visible {
-        self.backgroundColor = nil
         self.setSkeletonVisibility(isVisible: false, baseColor: baseColor, secondaryColor: nil)
       }
     }
   }
 
   private func checkAndUpdateSkeleton() {
-  // Ensure that we have secondaryBackgroundColor and initBackgroundColor from react native then update the skeleton
-  if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !initBackgroundColor.isEmpty {
+  // Ensure that we have secondaryBackgroundColor and baseBackgroundColor from react native then update the skeleton
+  if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !baseBackgroundColor.isEmpty {
       let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
       let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight)
       self.updateAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation)

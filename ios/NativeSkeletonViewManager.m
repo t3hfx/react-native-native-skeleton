@@ -4,7 +4,7 @@
 
 RCT_EXPORT_VIEW_PROPERTY(visible, BOOL)
 
-RCT_EXPORT_VIEW_PROPERTY(initBackgroundColor, NSString)
+RCT_EXPORT_VIEW_PROPERTY(baseBackgroundColor, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(secondaryBackgroundColor, NSString)
 

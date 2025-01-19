@@ -1,53 +1,60 @@
 // import * as React from 'react';
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeSkeletonView, NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
 
 export default function App() {
-  const [isVisible, setIsVisible]=useState(true)
+  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setIsVisible(false)
-    },3000)
-  },[])
-// #ffffff
+  useEffect(() => {
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <NativeSkeletonViewWrapper 
-        initBackgroundColor={'#363636'} 
-        secondaryBackgroundColor={'#6e6b6b'} 
-        visible={isVisible} 
-        style={styles.box}>
+    <ScrollView contentContainerStyle={styles.content} style={styles.container}>
+      <NativeSkeletonViewWrapper
+        baseBackgroundColor={'#363636'}
+        secondaryBackgroundColor={'#6e6b6b'}
+        visible={isVisible}
+        style={styles.box}
+      >
         <View>
-          <Text style={styles.itemTitle}>
-            This is native skeleton! 
-          </Text>
+          <Text style={styles.itemTitle}>This is native skeleton!</Text>
         </View>
-        </NativeSkeletonViewWrapper>
-    </View>
+      </NativeSkeletonViewWrapper>
+
+      <NativeSkeletonViewWrapper
+        baseBackgroundColor={'#363636'}
+        secondaryBackgroundColor={'#6e6b6b'}
+        visible={isVisible}
+        style={styles.box}
+      >
+        <Text style={{}}>This is native skeleton!</Text>
+      </NativeSkeletonViewWrapper>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'gray'
   },
   box: {
-    backgroundColor:'green',
-    borderRadius:10,
-    overflow:'hidden',
+    backgroundColor: 'green',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
-  itemTitle:{
-    textAlign:'center',
+  itemTitle: {
+    textAlign: 'center',
     color: 'black',
     marginVertical: 100,
     marginHorizontal: 100,
-  }
+  },
 });
