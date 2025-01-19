@@ -59,4 +59,12 @@ class NativeSkeletonView @JvmOverloads constructor(
         builder.setHighlightColor(Color.parseColor(secondaryBackgroundColor))
         shimmerFrameLayout.setShimmer(builder.build())
     }
+
+   fun setDuration(duration: Long) {
+        if (duration < 0) {
+            duration = 0;
+        }
+        builder.setDuration(duration)
+        shimmerFrameLayout.setShimmer(builder.build())
+    }
 }

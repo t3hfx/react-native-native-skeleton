@@ -28,4 +28,9 @@ class NativeSkeletonViewManager : SimpleViewManager<NativeSkeletonView>() {
     fun setSecondaryColor(view: NativeSkeletonView, secondaryBackgroundColor: String) {
         view.setSecondaryColor(secondaryBackgroundColor)
     }
+
+    @ReactProp(name = "duration")
+    fun setDuration(view: NativeSkeletonView, duration: Int) {
+        view.setDuration(duration.toLong())
+    }
 }
