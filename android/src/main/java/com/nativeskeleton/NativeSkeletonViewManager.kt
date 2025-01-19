@@ -14,13 +14,6 @@ class NativeSkeletonViewManager : SimpleViewManager<NativeSkeletonView>() {
         return NativeSkeletonView(reactContext)
     }
 
-    @ReactProp(name = "color")
-    fun setColor(view: NativeSkeletonView, color: String?) {
-        color?.let {
-            view.setColor(it)
-        }
-    }
-
     @ReactProp(name = "visible")
     fun setVisible(view: NativeSkeletonView, visible: Boolean) {
         view.setVisible(visible)

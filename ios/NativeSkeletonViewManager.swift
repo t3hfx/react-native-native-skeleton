@@ -17,6 +17,7 @@ class NativeSkeletonView : UIView {
   private var isSkeletonVisible = true
   private var baseColor: UIColor = UIColor.clear // Default color
   private var secondaryColor: UIColor = UIColor.clear // Default color
+  private var _duration: Double = 0.0 // Default duration
 
 
   // Expose baseBackgroundColor property to be set from JavaScript
@@ -36,6 +37,14 @@ class NativeSkeletonView : UIView {
     }
   }
 
+  // We want to pass a single value for both iOS and Android, so here we convert this value for SkeletonView
+  @objc var duration: NSNumber = 0 {
+    didSet {
+      self._duration = Double(Int(truncating: duration) / 1000)
+      checkAndUpdateSkeleton()
+    }
+  }
+
   // Expose visible property to be set from JavaScript
   @objc var visible: Bool = true {
     didSet {
@@ -49,9 +58,9 @@ class NativeSkeletonView : UIView {
 
   private func checkAndUpdateSkeleton() {
   // Ensure that we have secondaryBackgroundColor and baseBackgroundColor from react native then update the skeleton
-  if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !baseBackgroundColor.isEmpty {
+    if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !baseBackgroundColor.isEmpty && (_duration > 0.0) {
       let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
-      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight)
+      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: GradientDirection.topLeftBottomRight, duration: _duration)
       self.updateAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation)
     } 
   }

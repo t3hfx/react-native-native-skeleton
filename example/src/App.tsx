@@ -20,6 +20,7 @@ export default function App() {
         secondaryBackgroundColor={'#6e6b6b'}
         visible={isVisible}
         style={styles.box}
+        duration={5000}
       >
         <View>
           <Text style={styles.itemTitle}>This is native skeleton!</Text>
@@ -31,6 +32,7 @@ export default function App() {
         secondaryBackgroundColor={'#6e6b6b'}
         visible={isVisible}
         style={styles.box}
+        duration={5000}
       >
         <Text style={{}}>This is native skeleton!</Text>
       </NativeSkeletonViewWrapper>

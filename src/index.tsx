@@ -20,6 +20,7 @@ type NativeSkeletonProps = {
   style: ViewStyle;
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
+  duration: number
 };
 
 const ComponentName = 'NativeSkeletonView';
@@ -31,12 +32,24 @@ export const NativeSkeletonView =
         throw new Error(LINKING_ERROR);
       };
 
-export const NativeSkeletonViewWrapper = ({baseBackgroundColor, secondaryBackgroundColor, visible, style, children}: PropsWithChildren<NativeSkeletonProps>) =>
+export const NativeSkeletonViewWrapper = (
+    {baseBackgroundColor, 
+    secondaryBackgroundColor, 
+    visible, 
+    duration, 
+    style, 
+    children
+  }: PropsWithChildren<NativeSkeletonProps>) =>
   {
     return (
       <View style={style}> 
         {children}
-        <NativeSkeletonView baseBackgroundColor={baseBackgroundColor} secondaryBackgroundColor={secondaryBackgroundColor} visible={visible} style={{...StyleSheet.absoluteFillObject}} />
+        <NativeSkeletonView 
+          baseBackgroundColor={baseBackgroundColor} 
+          secondaryBackgroundColor={secondaryBackgroundColor} 
+          visible={visible} 
+          duration={duration ?? 1500}
+          style={{...StyleSheet.absoluteFillObject}} />
       </View>
     )
   }

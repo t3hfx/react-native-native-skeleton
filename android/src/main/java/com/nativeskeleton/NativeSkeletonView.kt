@@ -29,10 +29,6 @@ class NativeSkeletonView @JvmOverloads constructor(
         shimmerLowerView = findViewById(R.id.shimmer_lower_view)
     }
 
-    fun setColor(color: String) {
-        shimmerFrameLayout.setBackgroundColor(Color.parseColor(color))
-    }
-
     fun setVisible(visible: Boolean) {
         if (visible) {
             resetFadeOutAnimation()
