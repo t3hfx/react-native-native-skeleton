@@ -29,6 +29,7 @@ class NativeSkeletonView : UIView {
       checkAndUpdateSkeleton()
     }
   }
+
   // Expose secondaryBackgroundColor property to be set from JavaScript
    @objc var secondaryBackgroundColor: String = "" {
     didSet {
@@ -49,14 +50,16 @@ class NativeSkeletonView : UIView {
   // Expose visible property to be set from JavaScript
   @objc var visible: Bool = true {
     didSet {
-      checkAndUpdateSkeleton()
-      if !visible {
-        self.setSkeletonVisibility(isVisible: false, baseColor: baseColor, secondaryColor: nil)
+      if visible {
+        checkAndUpdateSkeleton()
+      }
+      else {
+        self.setSkeletonVisibility(isVisible: false)
       }
     }
   }
 
-  // Expose visible property to be set from JavaScript
+  // Expose direction property to be set from JavaScript
   @objc var direction: String = "" {
     didSet {
       switch direction {
@@ -96,21 +99,20 @@ class NativeSkeletonView : UIView {
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-    setupSkeleton()
   }
 
   private func setupSkeleton() {
     self.isSkeletonable = true
     // Here we launch skeleton on init of the component, so we don't see component underneath, 
     // it's fired before we get visible={true} from react native
-    self.setSkeletonVisibility(isVisible: true, baseColor: baseColor, secondaryColor: secondaryColor)
+    self.setSkeletonVisibility(isVisible: true)
   }
 
-    private func setSkeletonVisibility(isVisible: Bool, baseColor: UIColor, secondaryColor: UIColor?) {
+    private func setSkeletonVisibility(isVisible: Bool) {
     if isVisible {
       self.showAnimatedGradientSkeleton()
     } else {
-      self.hideSkeleton()
+      self.hideSkeleton(transition: .crossDissolve(0.4))
     }
   }
 
