@@ -53,7 +53,7 @@ export const NativeSkeletonViewWrapper = (
   }: PropsWithChildren<NativeSkeletonProps>) =>
   {
     return (
-      <View style={style}> 
+      <View style={[styles.container, style]}> 
         {children}
         <NativeSkeletonView 
           baseBackgroundColor={baseBackgroundColor} 
@@ -61,7 +61,16 @@ export const NativeSkeletonViewWrapper = (
           visible={visible} 
           duration={duration ?? 1500}
           direction={direction ??'topLeftBottomRight'}
-          style={{...StyleSheet.absoluteFillObject}} />
+          style={styles.nativeView} />
       </View>
     )
   }
+
+  const styles = StyleSheet.create({
+    container:{
+      overflow: 'hidden',
+    },
+    nativeView: {
+      ...StyleSheet.absoluteFillObject
+    }
+  })

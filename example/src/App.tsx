@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: 'green',
     borderRadius: 10,
-    overflow: 'hidden',
   },
   itemTitle: {
     textAlign: 'center',
