@@ -1,6 +1,4 @@
-// import * as React from 'react';
 import React, { useEffect, useState } from 'react';
-
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
 

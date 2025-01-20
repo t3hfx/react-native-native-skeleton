@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import React, { type PropsWithChildren } from 'react';
 import {
   requireNativeComponent,
   UIManager,
@@ -6,7 +6,7 @@ import {
   type ViewStyle,
   View,
   StyleSheet,
-  ColorValue,
+  type ColorValue,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -24,53 +24,57 @@ export const NativeSkeletonView =
         throw new Error(LINKING_ERROR);
       };
 
-type Directions = 
-// Both platforms
-'topLeftBottomRight' | 'bottomRightTopLeft' |  
-// Android only 
-'bottomLeftTopRight' | 'topRightBottomLeft' | 
-// iOS only
-'bottomTop' | 'topBottom' | 'leftRight' | 'rightLeft'
-      
+type Directions =
+  // Both platforms
+  | 'topLeftBottomRight'
+  | 'bottomRightTopLeft'
+  // Android only
+  | 'bottomLeftTopRight'
+  | 'topRightBottomLeft'
+  // iOS only
+  | 'bottomTop'
+  | 'topBottom'
+  | 'leftRight'
+  | 'rightLeft';
+
 type NativeSkeletonProps = {
   visible: boolean;
   style: ViewStyle;
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
-  duration: number
-  direction: Directions
-};      
+  duration?: number;
+  direction?: Directions;
+};
 
-export const NativeSkeletonViewWrapper = (
-  {
-    baseBackgroundColor, 
-    secondaryBackgroundColor, 
-    visible, 
-    duration, 
-    direction,
-    style, 
-    children
-  }: PropsWithChildren<NativeSkeletonProps>) =>
-  {
-    return (
-      <View style={[styles.container, style]}> 
-        {children}
-        <NativeSkeletonView 
-          baseBackgroundColor={baseBackgroundColor} 
-          secondaryBackgroundColor={secondaryBackgroundColor} 
-          visible={visible} 
-          duration={duration ?? 1500}
-          direction={direction ?? 'topLeftBottomRight'}
-          style={styles.nativeView} />
-      </View>
-    )
-  }
+export const NativeSkeletonViewWrapper = ({
+  baseBackgroundColor,
+  secondaryBackgroundColor,
+  visible,
+  duration,
+  direction,
+  style,
+  children,
+}: PropsWithChildren<NativeSkeletonProps>) => {
+  return (
+    <View style={[styles.container, style]}>
+      {children}
+      <NativeSkeletonView
+        baseBackgroundColor={baseBackgroundColor}
+        secondaryBackgroundColor={secondaryBackgroundColor}
+        visible={visible}
+        duration={duration ?? 1500}
+        direction={direction ?? 'topLeftBottomRight'}
+        style={styles.nativeView}
+      />
+    </View>
+  );
+};
 
-  const styles = StyleSheet.create({
-    container:{
-      overflow: 'hidden',
-    },
-    nativeView: {
-      ...StyleSheet.absoluteFillObject
-    }
-  })
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+  nativeView: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
