@@ -108,11 +108,17 @@ class NativeSkeletonView : UIView {
     self.setSkeletonVisibility(isVisible: true)
   }
 
-    private func setSkeletonVisibility(isVisible: Bool) {
+  private func setSkeletonVisibility(isVisible: Bool) {
     if isVisible {
       self.showAnimatedGradientSkeleton()
     } else {
-      self.hideSkeleton(transition: .crossDissolve(0.4))
+      // we could use just self.hideSkeleton(), but it animates weirdly, so use a native solution
+      UIView.animate(withDuration: 0.3, animations: {
+            self.alpha = 0.0 // Make the view fully transparent
+        }) { _ in
+            self.hideSkeleton() // Hide the skeleton after the animation completes
+            self.alpha = 1.0 // Reset the alpha to fully opaque for future use
+        }
     }
   }
 
