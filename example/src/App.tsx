@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
+import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';
+import { Card } from './components/Card';
+import { colors } from './constants/colors';
 
 export default function App() {
   const [isVisible, setIsVisible] = useState(true);
@@ -12,30 +13,26 @@ export default function App() {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={styles.content} style={styles.container}>
-      <NativeSkeletonViewWrapper
-        baseBackgroundColor={'#363636'}
-        secondaryBackgroundColor={'#6e6b6b'}
-        visible={isVisible}
-        style={styles.box}
-        duration={5000}
-        direction={'topRightBottomLeft'}
+    <SafeAreaView style={styles.flex}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        style={styles.container}
       >
-        <View>
-          <Text style={styles.itemTitle}>This is native skeleton!</Text>
-        </View>
-      </NativeSkeletonViewWrapper>
-
-      <NativeSkeletonViewWrapper
-        baseBackgroundColor={'#363636'}
-        secondaryBackgroundColor={'#6e6b6b'}
-        visible={isVisible}
-        style={styles.box}
-        duration={5000}
-      >
-        <Text style={{}}>This is native skeleton!</Text>
-      </NativeSkeletonViewWrapper>
-    </ScrollView>
+        <Text style={styles.title}>
+          Hey, this is a new native skeleton solution
+        </Text>
+        <Card
+          loading={isVisible}
+          skeletonBaseBackgroundColor={colors.grayLight2}
+          skeletonSecondaryBackgroundColor={colors.white1}
+          title={'This is a post title'}
+          description={
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+          }
+          style={styles.card}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -44,17 +41,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginHorizontal: 16,
+    marginVertical: 16,
   },
-  box: {
-    backgroundColor: 'green',
-    borderRadius: 10,
+  flex: {
+    flex: 1,
   },
-  itemTitle: {
+  title: {
+    fontSize: 30,
     textAlign: 'center',
-    color: 'black',
-    marginVertical: 100,
-    marginHorizontal: 100,
+  },
+  card: {
+    marginTop: 16,
   },
 });

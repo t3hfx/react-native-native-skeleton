@@ -4,6 +4,7 @@ import {
   UIManager,
   Platform,
   type ViewStyle,
+  type StyleProp,
   View,
   StyleSheet,
   type ColorValue,
@@ -39,7 +40,7 @@ type Directions =
 
 type NativeSkeletonProps = {
   visible: boolean;
-  style: ViewStyle;
+  style: StyleProp<ViewStyle>;
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
   duration?: number;
