@@ -21,6 +21,7 @@ type Props = {
   title: string;
   description: string;
   style: StyleProp<ViewStyle>;
+  dark?: boolean;
 };
 
 export const Card = ({
@@ -30,9 +31,10 @@ export const Card = ({
   title,
   description,
   style,
+  dark,
 }: Props) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, dark && styles.darkContainer, style]}>
       <NativeSkeletonViewWrapper
         visible={loading}
         style={styles.avatar}
@@ -53,7 +55,9 @@ export const Card = ({
           visible={loading}
           style={styles.textWrapper}
         >
-          <Text style={styles.titleText}>{title}</Text>
+          <Text style={[styles.titleText, dark && styles.darkColor]}>
+            {title}
+          </Text>
         </NativeSkeletonViewWrapper>
         <NativeSkeletonViewWrapper
           baseBackgroundColor={skeletonBaseBackgroundColor}
@@ -61,7 +65,7 @@ export const Card = ({
           visible={loading}
           style={[styles.textWrapper, styles.desc]}
         >
-          <Text>{description}</Text>
+          <Text style={dark && styles.darkColor}>{description}</Text>
         </NativeSkeletonViewWrapper>
       </View>
     </View>
@@ -76,6 +80,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 8,
     ...shadows.medium,
+    marginHorizontal: 16,
+  },
+  darkContainer: {
+    backgroundColor: colors.grayDark1,
   },
   avatar: {
     borderRadius: 25,
@@ -94,5 +102,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 18,
+  },
+  darkColor: {
+    color: colors.white1,
   },
 });

@@ -7,4 +7,5 @@ export const colors = {
   grayLight2: '#d6d6d6',
   grayLight3: '#c2c2c2',
   grayLight4: '#d9d9d9',
+  grayDark1: '#2e2e2e',
 };
