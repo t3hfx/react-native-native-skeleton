@@ -25,7 +25,7 @@ export const NativeSkeletonView =
         throw new Error(LINKING_ERROR);
       };
 
-type Directions =
+export type SkeletonDirections =
   // Both platforms
   | 'topLeftBottomRight'
   | 'bottomRightTopLeft'
@@ -44,7 +44,7 @@ type NativeSkeletonProps = {
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
   duration?: number;
-  direction?: Directions;
+  direction?: SkeletonDirections;
 };
 
 export const NativeSkeletonViewWrapper = ({

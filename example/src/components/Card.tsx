@@ -10,7 +10,10 @@ import {
 import React from 'react';
 
 import { View } from 'react-native';
-import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
+import {
+  NativeSkeletonViewWrapper,
+  type SkeletonDirections,
+} from 'react-native-native-skeleton';
 import { colors } from '../constants/colors';
 import { shadows } from '../constants/shadows';
 
@@ -18,9 +21,11 @@ type Props = {
   loading: boolean;
   skeletonBaseBackgroundColor: ColorValue;
   skeletonSecondaryBackgroundColor: ColorValue;
+  skeletonDuration?: number;
+  skeletonDirection?: SkeletonDirections;
   title: string;
   description: string;
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   dark?: boolean;
 };
 
@@ -28,6 +33,8 @@ export const Card = ({
   loading,
   skeletonBaseBackgroundColor,
   skeletonSecondaryBackgroundColor,
+  skeletonDuration,
+  skeletonDirection,
   title,
   description,
   style,
@@ -40,6 +47,8 @@ export const Card = ({
         style={styles.avatar}
         baseBackgroundColor={skeletonBaseBackgroundColor}
         secondaryBackgroundColor={skeletonSecondaryBackgroundColor}
+        duration={skeletonDuration}
+        direction={skeletonDirection}
       >
         <Image
           style={styles.avatar}
@@ -54,6 +63,8 @@ export const Card = ({
           secondaryBackgroundColor={skeletonSecondaryBackgroundColor}
           visible={loading}
           style={styles.textWrapper}
+          duration={skeletonDuration}
+          direction={skeletonDirection}
         >
           <Text style={[styles.titleText, dark && styles.darkColor]}>
             {title}
@@ -64,6 +75,8 @@ export const Card = ({
           secondaryBackgroundColor={skeletonSecondaryBackgroundColor}
           visible={loading}
           style={[styles.textWrapper, styles.desc]}
+          duration={skeletonDuration}
+          direction={skeletonDirection}
         >
           <Text style={dark && styles.darkColor}>{description}</Text>
         </NativeSkeletonViewWrapper>
