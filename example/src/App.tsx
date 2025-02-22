@@ -15,12 +15,6 @@ import type { SkeletonDirections } from 'react-native-native-skeleton';
 export default function App() {
   const [isVisible, setIsVisible] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsVisible(false);
-  //   }, 3000);
-  // }, []);
-
   const [duration, setDuration] = useState<number>(3000);
 
   const [direction, setDirection] =
@@ -99,6 +93,12 @@ export default function App() {
 
         <View style={styles.blackContainer}>
           <Text style={[styles.title, styles.titleWhite]}>Black version</Text>
+          <Pressable
+            style={styles.button}
+            onPress={setIsVisible.bind(null, !isVisible)}
+          >
+            <Text>{isVisible ? 'Stop loading' : 'Start loading'}</Text>
+          </Pressable>
           <Card
             loading={isVisible}
             skeletonBaseBackgroundColor={colors.gray1}
@@ -172,5 +172,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingTop: 16,
     paddingBottom: 30,
+  },
+  button: {
+    marginTop: 16,
+    backgroundColor: colors.white1,
+    alignSelf: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 4,
   },
 });
