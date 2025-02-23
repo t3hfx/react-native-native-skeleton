@@ -6,9 +6,16 @@ This library is a cross-platform wrapper for native skeleton loading libraries, 
 
 ## Running example
 
-| Video iOS              | Video Android 4gb device ram   |
-| ---------------------- | ------------------------------ |
-| ![iOS](https://github.com/user-attachments/assets/25ddcb60-0052-4007-bb23-4fb2043e716f) | ![](https://github.com/user-attachments/assets/23a2cb0b-7d9a-4c92-ad39-4474ea513269) |
+### Video iOS
+
+https://github.com/user-attachments/assets/4e9336b2-4d60-4341-8866-c2056a5a2124
+
+
+### Video Android 4gb device ram
+
+https://github.com/user-attachments/assets/23a2cb0b-7d9a-4c92-ad39-4474ea513269
+
+
 
 You could try to play with different settings in example/ project. To do this you would need to:
 
@@ -63,18 +70,8 @@ import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
 | **baseBackgroundColor**      | `ColorValue`                            | undefined |
 | **secondaryBackgroundColor** | `ColorValue`                            | undefined |
 | **duration**                 | `number`                                | `1500`    |
-| **skeletonDirection**        | `SkeletonDirections ( // Both platforms |
-| 'topLeftBottomRight'         |
-| 'bottomRightTopLeft'         |
+| **skeletonDirection**        | `SkeletonDirections` // Both platforms 'topLeftBottomRight' 'bottomRightTopLeft' // Android only 'bottomLeftTopRight' 'topRightBottomLeft' // iOS only 'bottomTop' 'topBottom' 'leftRight' 'rightLeft' | 'topLeftBottomRight'
 
-// Android only
-| 'bottomLeftTopRight'
-| 'topRightBottomLeft'
-// iOS only
-| 'bottomTop'
-| 'topBottom'
-| 'leftRight'
-| 'rightLeft')`|`topLeftBottomRight`
 
 ## Contributing
 
@@ -83,7 +80,5 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
----
 
 Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
