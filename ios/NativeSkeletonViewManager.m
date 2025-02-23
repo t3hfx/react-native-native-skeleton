@@ -10,6 +10,6 @@ RCT_EXPORT_VIEW_PROPERTY(secondaryBackgroundColor, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(duration, NSNumber)
 
-RCT_EXPORT_VIEW_PROPERTY(direction, NSString)
+RCT_EXPORT_VIEW_PROPERTY(skeletonDirection, NSString)
 
 @end

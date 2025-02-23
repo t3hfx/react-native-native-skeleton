@@ -6,7 +6,7 @@ This library is a cross-platform wrapper for native skeleton loading libraries, 
 
 ## Running example
 
-You could try to play with different settings in example/ folder. To do this you would need to:
+You could try to play with different settings in example/ project. To do this you would need to:
 
 ```sh
 cd example
@@ -48,7 +48,7 @@ import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
   baseBackgroundColor={'#2e2e2e'}
   secondaryBackgroundColor={'#d9d9d9'}
   duration={2500}
-  direction={'bottomRightTopLeft'}
+  skeletonDirection={'bottomRightTopLeft'}
 />;
 ```
 
@@ -58,7 +58,7 @@ import { NativeSkeletonViewWrapper } from 'react-native-native-skeleton';
 | **baseBackgroundColor**      | `ColorValue`                            | undefined |
 | **secondaryBackgroundColor** | `ColorValue`                            | undefined |
 | **duration**                 | `number`                                | `1500`    |
-| **direction**                | `SkeletonDirections ( // Both platforms |
+| **skeletonDirection**        | `SkeletonDirections ( // Both platforms |
 | 'topLeftBottomRight'         |
 | 'bottomRightTopLeft'         |
 

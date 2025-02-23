@@ -44,7 +44,7 @@ type NativeSkeletonProps = {
   baseBackgroundColor: ColorValue;
   secondaryBackgroundColor: ColorValue;
   duration?: number;
-  direction?: SkeletonDirections;
+  skeletonDirection?: SkeletonDirections;
 };
 
 export const NativeSkeletonViewWrapper = ({
@@ -52,7 +52,7 @@ export const NativeSkeletonViewWrapper = ({
   secondaryBackgroundColor,
   visible,
   duration,
-  direction,
+  skeletonDirection,
   style,
   children,
 }: PropsWithChildren<NativeSkeletonProps>) => {
@@ -64,7 +64,7 @@ export const NativeSkeletonViewWrapper = ({
         secondaryBackgroundColor={secondaryBackgroundColor}
         visible={visible}
         duration={duration ?? 1500}
-        direction={direction ?? 'topLeftBottomRight'}
+        skeletonDirection={skeletonDirection ?? 'topLeftBottomRight'}
         style={styles.nativeView}
       />
     </View>

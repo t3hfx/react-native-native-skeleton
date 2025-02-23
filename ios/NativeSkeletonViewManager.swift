@@ -20,7 +20,6 @@ class NativeSkeletonView : UIView {
   private var _duration: Double = 0.0 // Default duration
   private var _direction: GradientDirection = .topLeftBottomRight // Default direction
 
-
   // Expose baseBackgroundColor property to be set from JavaScript
   @objc var baseBackgroundColor: String = "" {
     didSet {
@@ -51,6 +50,10 @@ class NativeSkeletonView : UIView {
   @objc var visible: Bool = true {
     didSet {
       if visible {
+        if !self.isSkeletonVisible {
+          // This is launched if we made visible false, then true again
+          setupSkeleton()
+        }
         checkAndUpdateSkeleton()
       }
       else {
@@ -60,9 +63,9 @@ class NativeSkeletonView : UIView {
   }
 
   // Expose direction property to be set from JavaScript
-  @objc var direction: String = "" {
+  @objc var skeletonDirection: String = "" {
     didSet {
-      switch direction {
+      switch skeletonDirection {
         case "leftRight":
             self._direction = .leftRight
         case "rightLeft":
@@ -82,14 +85,26 @@ class NativeSkeletonView : UIView {
     }
   }
 
+ private func createSkeletonSettings(baseColor: UIColor, secondaryColor: UIColor?, direction: GradientDirection, duration: Double) -> (gradient: SkeletonGradient, animation: SkeletonLayerAnimation) {
+    // Create the gradient
+    let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
+    
+    // Create the animation
+    let animation = SkeletonAnimationBuilder()
+        .makeSlidingAnimation(withDirection: direction, duration: duration)
+    
+    // Return both as a tuple
+    return (gradient: customGradient, animation: animation)
+}
+
   private func checkAndUpdateSkeleton() {
-  // Ensure that we have secondaryBackgroundColor and baseBackgroundColor from react native then update the skeleton
-    if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !baseBackgroundColor.isEmpty && (_duration > 0.0) && direction != "" {
-      let customGradient = SkeletonGradient(baseColor: baseColor, secondaryColor: secondaryColor)
-      let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: self._direction, duration: _duration)
-      self.updateAnimatedGradientSkeleton(usingGradient: customGradient, animation: animation)
+    // Ensure that we have props from react native, then update the skeleton
+    if isSkeletonVisible && !secondaryBackgroundColor.isEmpty && !baseBackgroundColor.isEmpty && (_duration > 0.0) && skeletonDirection != "" {
+      let (gradient, animation) = createSkeletonSettings(baseColor: baseColor, secondaryColor: secondaryColor, direction: _direction, duration: _duration)
+      self.updateAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
     } 
   }
+
 
 
   override init(frame: CGRect) {
@@ -103,15 +118,19 @@ class NativeSkeletonView : UIView {
 
   private func setupSkeleton() {
     self.isSkeletonable = true
+    self.isSkeletonVisible = true
     // Here we launch skeleton on init of the component, so we don't see component underneath, 
     // it's fired before we get visible={true} from react native
+    // Also it's launched if we made visible={false}, and then visible={true}
     self.setSkeletonVisibility(isVisible: true)
   }
 
   private func setSkeletonVisibility(isVisible: Bool) {
     if isVisible {
-      self.showAnimatedGradientSkeleton()
+      let (gradient, animation) = createSkeletonSettings(baseColor: baseColor, secondaryColor: secondaryColor, direction: _direction, duration: _duration)
+      self.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
     } else {
+      self.isSkeletonVisible = false
       // we could use just self.hideSkeleton(), but it animates weirdly, so use a native solution
       UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0.0 // Make the view fully transparent

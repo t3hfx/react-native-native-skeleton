@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -12,12 +12,17 @@ import { colors } from './constants/colors';
 import { Picker } from './components/Picker';
 import type { SkeletonDirections } from 'react-native-native-skeleton';
 
+const durations = [1000, 2000, 3000, 5000];
+const bothPlatformsDirections = ['topLeftBottomRight', 'bottomRightTopLeft'];
+const androidDirections = ['bottomLeftTopRight', 'topRightBottomLeft'];
+const iosDirections = ['bottomTop', 'topBottom', 'leftRight', 'rightLeft'];
+
 export default function App() {
   const [isVisible, setIsVisible] = useState(true);
 
   const [duration, setDuration] = useState<number>(3000);
 
-  const [direction, setDirection] =
+  const [skeletonDirection, setDirection] =
     useState<SkeletonDirections>('topLeftBottomRight');
 
   return (
@@ -26,40 +31,35 @@ export default function App() {
         <Text style={styles.title}>Settings</Text>
 
         <Text style={styles.setting}>Duration</Text>
-        <Picker
-          items={[1000, 2000, 3000, 5000]}
-          onPress={setDuration}
-          activeItem={duration}
-        />
+        <Picker items={durations} onPress={setDuration} activeItem={duration} />
 
         <Text style={styles.setting}>Direction both platforms</Text>
         <Picker
-          items={[
+          items={
             // Both platforms
-            'topLeftBottomRight',
-            'bottomRightTopLeft',
-          ]}
+            bothPlatformsDirections
+          }
           onPress={setDirection}
-          activeItem={direction}
+          activeItem={skeletonDirection}
         />
         <Text style={styles.setting}>Direction android only</Text>
         <Picker
-          items={['bottomLeftTopRight', 'topRightBottomLeft']}
+          items={androidDirections}
           onPress={setDirection}
-          activeItem={direction}
+          activeItem={skeletonDirection}
         />
         <Text style={styles.setting}>Direction iOS only</Text>
         <Picker
-          items={['bottomTop', 'topBottom', 'leftRight', 'rightLeft']}
+          items={iosDirections}
           onPress={setDirection}
-          activeItem={direction}
+          activeItem={skeletonDirection}
         />
         <Card
           loading={isVisible}
           skeletonBaseBackgroundColor={colors.grayLight2}
           skeletonSecondaryBackgroundColor={colors.white1}
           skeletonDuration={duration}
-          skeletonDirection={direction}
+          skeletonDirection={skeletonDirection}
           title={'This is a post title'}
           description={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -71,7 +71,7 @@ export default function App() {
           skeletonBaseBackgroundColor={colors.grayLight2}
           skeletonSecondaryBackgroundColor={colors.white1}
           skeletonDuration={duration}
-          skeletonDirection={direction}
+          skeletonDirection={skeletonDirection}
           title={'This is a post title'}
           description={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -83,7 +83,7 @@ export default function App() {
           skeletonBaseBackgroundColor={colors.grayLight2}
           skeletonSecondaryBackgroundColor={colors.white1}
           skeletonDuration={duration}
-          skeletonDirection={direction}
+          skeletonDirection={skeletonDirection}
           title={'This is a post title'}
           description={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -104,7 +104,7 @@ export default function App() {
             skeletonBaseBackgroundColor={colors.gray1}
             skeletonSecondaryBackgroundColor={colors.grayLight1}
             skeletonDuration={duration}
-            skeletonDirection={direction}
+            skeletonDirection={skeletonDirection}
             title={'This is a post title'}
             description={
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -117,7 +117,7 @@ export default function App() {
             skeletonBaseBackgroundColor={colors.gray1}
             skeletonSecondaryBackgroundColor={colors.grayLight1}
             skeletonDuration={duration}
-            skeletonDirection={direction}
+            skeletonDirection={skeletonDirection}
             title={'This is a post title'}
             description={
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -130,7 +130,7 @@ export default function App() {
             skeletonBaseBackgroundColor={colors.gray1}
             skeletonSecondaryBackgroundColor={colors.grayLight1}
             skeletonDuration={duration}
-            skeletonDirection={direction}
+            skeletonDirection={skeletonDirection}
             title={'This is a post title'}
             description={
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit'

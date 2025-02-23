@@ -48,7 +48,7 @@ export const Card = ({
         baseBackgroundColor={skeletonBaseBackgroundColor}
         secondaryBackgroundColor={skeletonSecondaryBackgroundColor}
         duration={skeletonDuration}
-        direction={skeletonDirection}
+        skeletonDirection={skeletonDirection}
       >
         <Image
           style={styles.avatar}
@@ -64,7 +64,7 @@ export const Card = ({
           visible={loading}
           style={styles.textWrapper}
           duration={skeletonDuration}
-          direction={skeletonDirection}
+          skeletonDirection={skeletonDirection}
         >
           <Text style={[styles.titleText, dark && styles.darkColor]}>
             {title}
@@ -76,7 +76,7 @@ export const Card = ({
           visible={loading}
           style={[styles.textWrapper, styles.desc]}
           duration={skeletonDuration}
-          direction={skeletonDirection}
+          skeletonDirection={skeletonDirection}
         >
           <Text style={dark && styles.darkColor}>{description}</Text>
         </NativeSkeletonViewWrapper>
