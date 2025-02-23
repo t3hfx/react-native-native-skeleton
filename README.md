@@ -13,6 +13,7 @@ This library is a cross-platform wrapper for native skeleton loading libraries, 
 You could try to play with different settings in example/ project. To do this you would need to:
 
 ```sh
+yarn
 cd example
 yarn
 cd ios && pod install
