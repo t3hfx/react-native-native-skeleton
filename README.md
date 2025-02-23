@@ -8,7 +8,7 @@ This library is a cross-platform wrapper for native skeleton loading libraries, 
 
 | Video iOS              | Video Android 4gb device ram   |
 | ---------------------- | ------------------------------ |
-| ![iOS](assets/ios.mp4) | ![Android](assets/android.mp4) |
+| ![iOS](https://github.com/user-attachments/assets/25ddcb60-0052-4007-bb23-4fb2043e716f) | ![](https://github.com/user-attachments/assets/23a2cb0b-7d9a-4c92-ad39-4474ea513269) |
 
 You could try to play with different settings in example/ project. To do this you would need to:
 
