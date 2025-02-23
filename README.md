@@ -6,6 +6,10 @@ This library is a cross-platform wrapper for native skeleton loading libraries, 
 
 ## Running example
 
+| Video iOS              | Video Android 4gb device ram   |
+| ---------------------- | ------------------------------ |
+| ![iOS](assets/ios.mp4) | ![Android](assets/android.mp4) |
+
 You could try to play with different settings in example/ project. To do this you would need to:
 
 ```sh
